@@ -1,13 +1,13 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Chats from "./Chats";
-import Calls from "./Calls";
-import CameraView from "./CameraView";
-import Contacts from "./Contacts";
-import Settings from "./Settings";
+import Chats from "./screens/Chats";
+import Calls from "./screens/Calls";
+import CameraView from "./screens/CameraView";
+import Contacts from "./screens/Contacts";
+import Settings from "./screens/Settings";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { withTheme } from "react-native-paper";
+import { Avatar, withTheme } from "react-native-paper";
 
 const Tab = createBottomTabNavigator();
 
@@ -104,7 +104,6 @@ function HomeTabs(props) {
         })}
       />
       <Tab.Screen
-        
         name="Camera"
         component={CameraView}
         options={{
@@ -114,9 +113,28 @@ function HomeTabs(props) {
       <Tab.Screen
         name="Contacts"
         component={Contacts}
-        options={{
-          headerShown: false,
-        }}
+        options={({ route }) => ({
+          headerShown: true,
+          headerStyle: { backgroundColor: colors.headerBackgroundColor },
+          headerTitleStyle: { color: "#FFF" },
+          headerTitleAlign: "left",
+          headerRight: () => (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                paddingHorizontal: 10,
+              }}
+            >
+              <TouchableOpacity style={{ marginRight: 15 }}>
+                <Ionicons name="person-add" color={colors.primary} size={18} />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Ionicons name="ios-search" color={colors.primary} size={18} />
+              </TouchableOpacity>
+            </View>
+          ),
+        })}
       />
       <Tab.Screen
         name="Settings"
