@@ -1,13 +1,13 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Chats from "./screens/Chats";
+import React from "react";
+import { TouchableOpacity, View } from "react-native";
+import { withTheme } from "react-native-paper";
+import Ionicons from "react-native-vector-icons/Ionicons";
 import Calls from "./screens/Calls";
 import CameraView from "./screens/CameraView";
+import Chats from "./screens/Chats";
 import Contacts from "./screens/Contacts";
 import Settings from "./screens/Settings";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { Avatar, withTheme } from "react-native-paper";
 
 const Tab = createBottomTabNavigator();
 
@@ -46,7 +46,7 @@ function HomeTabs(props) {
         options={({ route }) => ({
           headerShown: true,
           headerStyle: { backgroundColor: colors.headerBackgroundColor },
-          headerTitleStyle: { color: "#FFF" },
+          headerTitleStyle: { color: colors.titleColor },
           headerTitleAlign: "left",
           headerRight: () => (
             <View
@@ -57,12 +57,16 @@ function HomeTabs(props) {
               }}
             >
               <TouchableOpacity style={{ marginRight: 15 }}>
-                <Ionicons name="ios-search" color={colors.primary} size={18} />
+                <Ionicons
+                  name="ios-search"
+                  color={colors.iconColor}
+                  size={18}
+                />
               </TouchableOpacity>
               <TouchableOpacity>
                 <Ionicons
                   name="ellipsis-vertical"
-                  color={colors.primary}
+                  color={colors.iconColor}
                   size={18}
                 />
               </TouchableOpacity>
@@ -80,7 +84,7 @@ function HomeTabs(props) {
             backgroundColor: colors.headerBackgroundColor,
             elevation: 0,
           },
-          headerTitleStyle: { color: "#FFF" },
+          headerTitleStyle: { color: colors.titleColor },
           headerRight: () => (
             <View
               style={{
@@ -90,12 +94,16 @@ function HomeTabs(props) {
               }}
             >
               <TouchableOpacity style={{ marginRight: 15 }}>
-                <Ionicons name="ios-search" color={colors.primary} size={18} />
+                <Ionicons
+                  name="ios-search"
+                  color={colors.iconColor}
+                  size={18}
+                />
               </TouchableOpacity>
               <TouchableOpacity>
                 <Ionicons
                   name="ellipsis-vertical"
-                  color={colors.primary}
+                  color={colors.iconColor}
                   size={18}
                 />
               </TouchableOpacity>
@@ -116,7 +124,7 @@ function HomeTabs(props) {
         options={({ route }) => ({
           headerShown: true,
           headerStyle: { backgroundColor: colors.headerBackgroundColor },
-          headerTitleStyle: { color: "#FFF" },
+          headerTitleStyle: { color: colors.titleColor },
           headerTitleAlign: "left",
           headerRight: () => (
             <View
@@ -127,10 +135,18 @@ function HomeTabs(props) {
               }}
             >
               <TouchableOpacity style={{ marginRight: 15 }}>
-                <Ionicons name="person-add" color={colors.primary} size={18} />
+                <Ionicons
+                  name="person-add"
+                  color={colors.iconColor}
+                  size={18}
+                />
               </TouchableOpacity>
               <TouchableOpacity>
-                <Ionicons name="ios-search" color={colors.primary} size={18} />
+                <Ionicons
+                  name="ios-search"
+                  color={colors.iconColor}
+                  size={18}
+                />
               </TouchableOpacity>
             </View>
           ),
@@ -140,7 +156,10 @@ function HomeTabs(props) {
         name="Settings"
         component={Settings}
         options={{
-          headerShown: false,
+          headerShown: true,
+          headerTitleAlign: "left",
+          headerStyle: { backgroundColor: colors.headerBackgroundColor },
+          headerTitleStyle: { color: colors.titleColor },
         }}
       />
     </Tab.Navigator>

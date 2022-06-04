@@ -1,8 +1,6 @@
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import React from "react";
-import { Avatar, Colors, Divider, List, withTheme } from "react-native-paper";
-import Ionicons from "react-native-vector-icons/Ionicons";
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import React from "react";
+import { withTheme } from "react-native-paper";
 import AllCalls from "./AllCalls";
 import MissedCalls from "./MissedCalls";
 
@@ -99,7 +97,7 @@ function Calls({theme, navigation }) {
   return (
     <TopTabs.Navigator
       screenOptions={{
-        tabBarLabelStyle: { fontWeight: "bold", color: "#FFF" },
+        tabBarLabelStyle: { fontWeight: "bold", color: colors.titleColor },
         tabBarStyle: { backgroundColor: colors.headerBackgroundColor },
       }}
     >

@@ -1,12 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Avatar, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
-import HomeTabs from './HomeTabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ChatDetail from './ChatDetail';
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Avatar, DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 import Feather from "react-native-vector-icons/Feather";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import HomeTabs from './HomeTabs';
+import ChatDetail from './screens/ChatDetail';
 
 const theme = {
   ...DefaultTheme,
@@ -14,7 +13,9 @@ const theme = {
     ...DefaultTheme.colors,
     primary: "#4DB6AC",
     accent: "#2D292D",
-    headerBackgroundColor: "#38383C",
+    titleColor: "#000",
+    iconColor: "#08979c",
+    headerBackgroundColor: "#D0D0D0",
   },
 };
 

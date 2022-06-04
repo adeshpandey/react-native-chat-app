@@ -1,5 +1,5 @@
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import React from "react";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { Avatar, Divider, List } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
