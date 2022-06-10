@@ -1,116 +1,60 @@
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
-import React from "react";
+import { getAuth } from "firebase/auth";
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import { FlatList, TouchableOpacity, View } from "react-native";
 import { Avatar, Divider, List } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-const data = [
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-  {
-    icon: "person-outline",
-    name: "Adesh Pandey",
-    msg_time: "22/04/2022 01:00 PM",
-    msg: "Hi there",
-  },
-];
 
-export default function Chats({ navigation }) {
+const firestore = getFirestore();
+const auth = getAuth();
+
+export default function Chats({navigation}) {
+  const [users, setUsers] = useState();
+  
+  useEffect(() => {
+    getDocs(collection(firestore, "users"))
+      .then((snapshots) => {
+        let newUsers = [];
+        snapshots.forEach((doc) => {
+          const data = doc.data();
+          newUsers.push({
+            _id: doc.id,
+            ...data,
+          });
+        });
+        setUsers(newUsers);
+      })
+      .catch((err) => console.log(err));
+  }, [setUsers]);
+
   return (
     <View>
       <FlatList
         ItemSeparatorComponent={() => <Divider />}
-        data={data}
+        data={users}
         keyExtractor={ (item,idx) => idx }
         renderItem={({ item, idx }) => {
           return (
-            <TouchableOpacity onPress={() => navigation.navigate("ChatDetail", {name: 'Adesh Pandey'})}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("ChatDetail", {
+                  id: item._id,
+                  name: item.email,
+                })
+              }
+            >
               <List.Item
-                title={item.name}
+                title={item.email}
                 left={() => (
                   <Avatar.Icon
                     icon={() => (
-                      <Ionicons name={item.icon} size={32} color="#FFF" />
+                      <Ionicons name="person-outline" size={32} color="#FFF" />
                     )}
                   />
                 )}
-                right={() => <Text>{item.msg_time}</Text>}
-                description={item.msg}
+                // right={() => <Text>{item.msg_time}</Text>}
+                // description={item.msg}
               />
             </TouchableOpacity>
           );
