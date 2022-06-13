@@ -3,11 +3,11 @@ import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import { withTheme } from "react-native-paper";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import SettingsNavigation from "./navigation/SettingsNavigation";
 import Calls from "./screens/Calls";
 import CameraView from "./screens/CameraView";
 import Chats from "./screens/Chats";
 import Contacts from "./screens/Contacts";
-import Settings from "./screens/Settings";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +21,7 @@ function HomeTabs(props) {
 
           if (route.name === "Calls") {
             iconName = focused ? "call" : "call-outline";
-          } else if (route.name === "Settings") {
+          } else if (route.name === "SettingsNavigation") {
             iconName = focused ? "settings" : "settings-outline";
           } else if (route.name == "Chats") {
             iconName = focused
@@ -153,13 +153,11 @@ function HomeTabs(props) {
         })}
       />
       <Tab.Screen
-        name="Settings"
-        component={Settings}
+        name="SettingsNavigation"
+        component={SettingsNavigation}
         options={{
-          headerShown: true,
-          headerTitleAlign: "left",
-          headerStyle: { backgroundColor: colors.headerBackgroundColor },
-          headerTitleStyle: { color: colors.titleColor },
+          headerShown: false,
+          title:'Settings'
         }}
       />
     </Tab.Navigator>

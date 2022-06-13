@@ -40,12 +40,12 @@ export default function Chats({navigation}) {
               onPress={() =>
                 navigation.navigate("ChatDetail", {
                   id: item._id,
-                  name: item.email,
+                  name: item.displayName,
                 })
               }
             >
               <List.Item
-                title={item.email}
+                title={item.displayName}
                 left={() => (
                   <Avatar.Icon
                     icon={() => (

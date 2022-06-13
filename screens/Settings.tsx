@@ -59,11 +59,15 @@ function Settings(props) {
     await signOut(auth);
   }
 
+  const gotoProfile = () => {
+    props.navigation.navigate("Profile");
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: "#FFF" }}>
       <List.Item
         title={() => (
-          <Text style={{ marginBottom: 10, fontSize: 24 }}>Adesh Pandey</Text>
+          <Text style={{ marginBottom: 10, fontSize: 24 }}>{auth.currentUser?.displayName}</Text>
         )}
         left={() => (
           <Avatar.Icon
@@ -81,6 +85,7 @@ function Settings(props) {
           />
         )}
         description="+971-5257-87316"
+        onPress={gotoProfile}
       />
       <Divider />
       <FlatList

@@ -34,28 +34,31 @@ export default function ChatDetail(props) {
 
 
   useEffect(() => {
+    const threadID = [auth.currentUser?.uid , id].sort().join("");
     setDoc(
-      doc(firestore, "threads", auth.currentUser?.uid + id),
+      doc(firestore, "threads", threadID),
       {
-        name: auth.currentUser?.uid + id,
+        name: threadID,
       },
       { merge: true }
     );
   }, [setRoom])
 
   useEffect(() => {
+    const threadID = [auth.currentUser?.uid, id].sort().join("");
 
     getDocs(collection(firestore, doc(
         firestore,
         "threads",
-        auth.currentUser?.uid + id).path, "messages"))
+        threadID).path, "messages"))
       .then((snapshots) => {
 
         const newMessages = snapshots.docs.map(snapshot => ( {
            _id: snapshot.id,
            name: '',
            ...snapshot.data(),
-              createdAt: snapshot.data().createdAt.toDate()
+              createdAt: snapshot.data().createdAt.toDate(),
+              user: {...snapshot.data().user, avatar: 'https://placeimg.com/140/140/any',}
           }));
         setMessages(newMessages);
       })
@@ -63,12 +66,13 @@ export default function ChatDetail(props) {
   }, [setMessages]);
 
   const sendMessage = useCallback((messages = []) => {
+    const threadID = [auth.currentUser?.uid, id].sort().join("");
+
     try {
-      // alert(auth.currentUser?.uid + id);
       const messageRef = collection(firestore, doc(
         firestore,
         "threads",
-        auth.currentUser?.uid + id).path, "messages");
+        threadID).path, "messages");
       addDoc(messageRef, {
         ...messages[0],
       });
@@ -103,6 +107,7 @@ export default function ChatDetail(props) {
         user={{ _id: auth.currentUser?.uid }}
         renderBubble={renderBubble}
         showUserAvatar
+        showAvatarForEveryMessage
       />
     </View>
   );
